@@ -2,7 +2,19 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.add(ft.SafeArea(ft.Text("Hello, Flet!")))
+    page.title = "Icon button with 'click' event"
 
+    def button_clicked(e):
+        b.data += 1
+        t.value = f"Button clicked {b.data} time(s)"
+        print(f"Button clicked {b.data} time(s)")
+        page.update()
 
-ft.app(main)
+    b = ft.IconButton(
+        icon=ft.icons.PLAY_CIRCLE_FILL_OUTLINED, on_click=button_clicked, data=0
+    )
+    t = ft.Text()
+
+    page.add(b, t)
+
+ft.app(target=main, port=24864)
